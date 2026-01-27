@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+    {% if tag_filter %}
+        <div class="filter-header">
+            <h2>Posts tagged with: <span class="tag">#{{ tag_filter }}</span></h2>
+            <a href="/">Show all posts</a>
+        </div>
+    {% endif %}
+
+    {% for post in posts %}
+        <article class="post-preview">
+            <h2><a href="/post/{{ post.slug }}">{{ post.title }}</a></h2>
+            <div class="metadata">
+                <time>{{ post.date }} • {{ post.time }}</time>
+                <div class="tag-list">
+                    {% for tag in post.tags %}
+                        <a href="/tag/{{ tag }}" class="tag-item">#{{ tag }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+
+{% endblock %}

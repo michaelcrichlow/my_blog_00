@@ -1,0 +1,215 @@
+/* 1. VARIABLE DEFINITIONS */
+:root {
+    --bg-page: #f5f5f5;
+    --bg-card: #ffffff;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --accent: #0984e3;
+    --border: #e1e4e8;
+    --code-bg: #f8f9fa;
+    --tag-bg: #e0e0e0;
+    
+    /* Syntax (GitHub Light) */
+    --code-keyword: #cf222e;
+    --code-string: #0a3069;
+    --code-comment: #6e7781;
+    --code-function: #8250df;
+    --code-variable: #953800;
+    --code-operator: #0550ae;
+}
+
+[data-theme="dark"] {
+    --bg-page: #121212;
+    --bg-card: #1e1e1e;
+    --text-main: #f5f5f5;
+    --text-muted: #b2bec3;
+    --accent: #74b9ff;
+    --border: #333333;
+    --code-bg: #2d2d2d;
+    --tag-bg: #333333;
+    
+    /* Syntax (GitHub Dark) */
+    --code-keyword: #ff7b72;   /* Reddish-pink */
+    --code-string: #a5d6ff;    /* Light blue */
+    --code-comment: #8b949e;   /* Grey */
+    --code-function: #d2a8ff;  /* Purple */
+    --code-variable: #ffa657;  /* Orange */
+    --code-operator: #79c0ff;  /* Bright blue */
+}
+
+/* 2. CORE LAYOUT */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Container to keep header and posts aligned */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 3. HEADER & NAVIGATION */
+.main-header {
+    width: 100%;
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    padding: 30px 0;
+    margin-bottom: 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-main); /* Uses variable now */
+}
+
+.logo-suffix {
+    color: var(--accent);
+    font-weight: 400;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    margin-left: 20px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+nav a:hover, nav a.active {
+    color: var(--accent);
+}
+
+/* 4. POST STYLING */
+article {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 40px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+h1, h2, h3 {
+    color: var(--text-main); /* Fixed: titles now change in dark mode */
+    margin-top: 0;
+}
+
+.metadata {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+/* 5. TAGS & BUTTONS */
+.tag-item {
+    display: inline-block;
+    background-color: var(--tag-bg);
+    color: var(--text-muted);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    margin-right: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.tag-item:hover {
+    background-color: var(--accent);
+    color: white;
+}
+
+#theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: var(--text-main);
+}
+
+/* 6. CODE BLOCKS */
+pre {
+    background-color: var(--code-bg);
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+}
+
+code {
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 0.95em;
+}
+
+/* Remove the bullet points from task lists specifically */
+.task-list-item {
+    list-style-type: none;
+}
+
+/* Align the checkbox nicely */
+.task-list-item input {
+    margin: 0 0.2em 0.25em -1.6em;
+    vertical-align: middle;
+}
+
+/* Strike through completed tasks */
+.task-list-item:has(input[checked]) {
+    color: var(--text-muted);
+    text-decoration: line-through;
+}
+
+/* Table Container */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 30px 0;
+    font-size: 0.95rem;
+    background-color: var(--bg-card);
+    overflow: hidden; /* Keeps rounded corners clean */
+}
+
+/* Header Cells */
+table th {
+    background-color: var(--code-bg);
+    color: var(--text-main);
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+}
+
+/* Body Cells */
+table td {
+    padding: 10px 15px;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+}
+
+/* Zebra Striping (Optional, but looks pro) */
+table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Dark Mode adjustment for Zebra Striping */
+[data-theme="dark"] table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03);
+}

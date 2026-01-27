@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <title>Notes on Software Development and Life | Michael Crichlow</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='code.css') }}">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <a href="/" class="logo">
+                <span class="logo-name">Mike Crichlow</span>
+                <span class="logo-suffix"> • blog</span>
+            </a>
+            <nav>
+                <a href="/" class="{{ 'active' if request.path == '/' else '' }}">Posts</a>
+                <a href="/about">About</a>
+                <button id="theme-toggle" aria-label="Toggle dark mode">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeIcon.textContent = '☀️';
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        let theme = document.documentElement.getAttribute('data-theme');
+        
+        if (theme === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            themeIcon.textContent = '🌙';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            themeIcon.textContent = '☀️';
+        }
+    });
+    </script>
+</body>
+</html>
